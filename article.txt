@@ -1,0 +1,35 @@
+Já vem um tempo que eu queria refazer meus projetos da 42.
+
+Eu queria vê o quanto evoluí depois de 2 anos de Common Core e revisitar conceitos que eu não tenha compreendido 100%.
+
+Vou tentar comentar aqui tudo que eu achei interesante adicionar e o porque, pra que eu possa registrar minha progressão.
+
+Começo sempre criando as pastas e arquivos bases necessários para desenvolver qualquer projeto com qualidade.
+
+Pensando em DevOps e na facilidade/agilidade de codar penso em uma estrutura que atenda esses requisítos básicos.
+
+- Que eu consiga buildar com facilidade:
+    - Nesse caso, eu adicionei o Makefile, ele vai ser responsável por automatizar o gerenciamento do projeto, buildar, testar, debug e limpeza. As primeiras regras que precisam existir nele são make, make clean, make fclean e make re. São as regras padrões que aprendi no Common Core e não sigo apenas por requerimento, mas me obriga a sempre escrever um código limpo, identificando qualquer lib faltante ou misconfiguration.
+- Que eu consiga testar com facilidade:
+    - Além da pasta de tests, é preciso imaginar quando e como quero realizar esses testes. Começo pelos testes unitários, que vai validar as entradas e saídas de cada função. Nesse projeto, ele é importante porque valida também os critérios de aceite, já que o objetivo é fornecer uma lib reutilizavel para os projetos seguintes do Common Core.
+    - Com a funcionalidade básica entregue, preciso pensar nos requisítos de qualidade. Essa é a parte que La Norme entra. Serão realizados testes de integração pra garantir que não há nenhum vazamento de memória, que o código tenha sido contruído seguindo o Clean Code de La Norme. Se qualquer desses testes falhar, não será possível entregar o projeto. Pra validar se houve vazamento de memória vou adicionar a flag make testmem, pra validar La Norme eu poderia simplesmente rodar com norminette, mas como quero automatizar a interação com o código, vou criar a pasta .githooks com o arquivo pre-commit, que irá validar La Norme antes de commitar, ou seja, não vai permitir que o projeto seja entregue sem que a norminette rode com sucesso.
+    - Há uma outra parte que eu gostaria de adicionar, uma validação E2E mas eu prefiro coloca-lo na próxima etapa, já que está relacionado a esteira de entrega.
+- Que eu consiga entregar o projeto, ou lançar uma release com facilidade:
+    - Nesse caso, eu vou incluir duas esteiras de integração contínua, uma para validar que o build ocorreu com sucesso, e outra pra validar que todos os testes passaram. Essas duas vão rodar ao mesmo tempo, e se elas passarem, irá ser aberto um PR para main.
+
+No final a estrutura de pastas ficaria parecido com isso:
+
+-| libft
+--| .githooks # arquivos de pre-commit
+--| .github   # esteiras de CI/CD
+--| src       # arquivos de origem
+--| tests     # arquivos de testes
+--| man       # arquivos de manual de uso das funções
+-- Makefile   # arquivo de configuração
+-- README.md  # documentação do repositório
+
+Agora vamos a construção. Primeiro eu vou criar, dentro da pasta src, o arquivo de uma das funções que precisam ser entregues: ft_isdigit.c
+
+Eu não vou entrar em detalhes de implementação da libft por acreditar que isso atrapalharia quem ainda está iniciando a jornada na 42, caso encontre esse repositório.
+
+Na pastas de tests,
